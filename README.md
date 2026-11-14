@@ -80,6 +80,21 @@ Launch the page in your browser and here you are: you have created your first dr
 
 *Coming soon.*
 
+# Heatmap Add-on
+
+An optional, zero-dependency heatmap layer lives in [`src/heatmap/`](src/heatmap). It bins
+`(x, y, value)` points onto a configurable grid, aggregates them (`sum`/`mean`/`count`/
+`min`/`max`/custom), maps the result through a configurable piecewise color scale, and draws
+through the existing `rect` primitive, so all legacy chart types remain untouched. Sparse grids
+render every cell with an explicit empty color; empty and all-zero datasets get distinct,
+non-black appearances; zooming changes geometry only and never the color mapping.
+
+* Demo: open [`demos/heatmap/index.html`](demos/heatmap/index.html) in a browser.
+* Full delivery notes (before/after data, failure paths, memory bounds, byte/pixel regression):
+  [`docs/HEATMAP.md`](docs/HEATMAP.md).
+* Tests and artifacts: `npm run test:heatmap` (requires `npm install` for the jsdom dev
+  dependency; the add-on itself has no runtime dependencies).
+
 # Contributing
 
 To contribute to AnyChart project please:

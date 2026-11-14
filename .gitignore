@@ -4,3 +4,4 @@
 out
 *.swp
 contrib/compiler/
+node_modules/

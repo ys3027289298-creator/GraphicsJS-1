@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>GraphicsJS Treemap Demo</title>
+  <style>
+    body { font-family: sans-serif; margin: 24px; color: #222; }
+    #stage svg { border: 1px solid #ccc; }
+    .toolbar { margin-bottom: 12px; }
+    #metrics { margin-top: 8px; font-size: 13px; color: #555; }
+    #breadcrumb { margin-bottom: 8px; font-size: 14px; }
+    #breadcrumb a { color: #1a6fbf; }
+  </style>
+</head>
+<body>
+  <h2>acgraph.treemap &mdash; squarify vs slice-dice</h2>
+  <div class="toolbar">
+    <label for="algorithm">Algorithm:</label>
+    <select id="algorithm">
+      <option value="squarify">squarify</option>
+      <option value="slice-dice">slice-dice</option>
+    </select>
+  </div>
+  <div id="breadcrumb"></div>
+  <div id="stage"></div>
+  <div id="metrics"></div>
+  <p>Click any group rectangle to drill down; use the breadcrumb to return.</p>
+  <script src="treemap-bundle.js"></script>
+  <script src="treemap.js"></script>
+</body>
+</html>

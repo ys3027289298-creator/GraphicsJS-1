@@ -4,3 +4,6 @@
 out
 *.swp
 contrib/compiler/
+node_modules/
+.chrome-cache/
+tools/_run-*.html

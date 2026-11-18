@@ -1,5 +1,6 @@
 goog.provide('acgraph.exporting');
 
+goog.require('acgraph.utils.Eps');
 goog.require('acgraph.vector.Stage');
 goog.require('goog.Uri.QueryData');
 goog.require('goog.net.IframeIo');
@@ -628,6 +629,76 @@ acgraph.vector.Stage.prototype.serializeToString_ = function(node) {
 
 
 //endregion
+//----------------------------------------------------------------------------------------------------------------------
+//
+//  EPS export (client-side, no export server round trip)
+//
+//----------------------------------------------------------------------------------------------------------------------
+/**
+ * Exports the stage content to Encapsulated PostScript (EPSF-3.0). Paths and
+ * text are emitted as native PostScript operators; effects unsupported by EPS
+ * Level 2 are degraded explicitly and reported in `warnings`.
+ *
+ * @return {{eps: string, warnings: Array.<string>, boundingBox: Array.<number>,
+ *     width: number, height: number}}
+ */
+acgraph.vector.Stage.prototype.toEps = function() {
+  if (acgraph.type() != acgraph.StageType.SVG) {
+    throw new Error(acgraph.error.getErrorMessage(
+        acgraph.error.Code.FEATURE_NOT_SUPPORTED_IN_VML));
+  }
+  return acgraph.utils.Eps.fromSvg(this.toSvg());
+};
+
+
+/**
+ * Saves the stage as an EPS file by triggering a client-side download. Unlike
+ * the raster/PDF exporters it performs no export-server request.
+ *
+ * @param {string=} opt_filename File name (the .eps extension is ensured).
+ */
+acgraph.vector.Stage.prototype.saveAsEps = function(opt_filename) {
+  var result = this.toEps();
+  var filename = opt_filename || 'stage.eps';
+  if (!/\.eps$/i.test(filename)) filename += '.eps';
+  var blob = new Blob([result.eps], {type: 'application/postscript'});
+  var url = URL.createObjectURL(blob);
+  var link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+};
+
+
+/**
+ * Returns the EPS document as a base64 data URI.
+ *
+ * @return {string}
+ */
+acgraph.vector.Stage.prototype.getEpsBase64String = function() {
+  var result = this.toEps();
+  return 'data:application/postscript;base64,' + btoa(
+      acgraph.utils.exporting.toBinaryString_(result.eps));
+};
+
+
+/**
+ * Encodes a UTF-8 string into a binary (latin1) string safe for btoa, so code
+ * points above 255 survive even if a degraded document still contains them in
+ * header comments.
+ *
+ * @param {string} str
+ * @return {string}
+ * @private
+ */
+acgraph.utils.exporting.toBinaryString_ = function(str) {
+  return unescape(encodeURIComponent(str));
+};
+
+
 (function() {
   goog.exportSymbol('acgraph.server', acgraph.server);
 
@@ -651,5 +722,8 @@ acgraph.vector.Stage.prototype.serializeToString_ = function(node) {
   proto['getPdfBase64String'] = proto.getPdfBase64String;
   proto['print'] = proto.print;
   proto['toSvg'] = proto.toSvg;
+  proto['toEps'] = proto.toEps;
+  proto['saveAsEps'] = proto.saveAsEps;
+  proto['getEpsBase64String'] = proto.getEpsBase64String;
 })();
 

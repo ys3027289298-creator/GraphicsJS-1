@@ -8,10 +8,11 @@ goog.addDependency('../../../../src/events/BrowserEvent.js', ['acgraph.events.Br
 goog.addDependency('../../../../src/events/Dragger.js', ['acgraph.events.DragEvent', 'acgraph.events.Dragger'], ['acgraph.math', 'goog.fx.DragEvent', 'goog.fx.Dragger', 'goog.math.Rect'], {});
 goog.addDependency('../../../../src/events/MouseWheelHandler.js', ['acgraph.events.MouseWheelHandler'], ['goog.events.MouseWheelHandler'], {});
 goog.addDependency('../../../../src/events/events.js', ['acgraph.events', 'acgraph.events.EventType'], ['goog.events'], {});
-goog.addDependency('../../../../src/exporting.js', ['acgraph.exporting'], ['acgraph.vector.Stage', 'goog.Uri.QueryData', 'goog.net.IframeIo', 'goog.net.XhrIo', 'goog.structs.Map'], {});
+goog.addDependency('../../../../src/exporting.js', ['acgraph.exporting'], ['acgraph.utils.Eps', 'acgraph.vector.Stage', 'goog.Uri.QueryData', 'goog.net.IframeIo', 'goog.net.XhrIo', 'goog.structs.Map'], {});
 goog.addDependency('../../../../src/math.js', ['acgraph.math'], ['goog.math', 'goog.math.Coordinate', 'goog.math.Rect', 'goog.math.Size'], {});
 goog.addDependency('../../../../src/utils/HTMLParser.js', ['acgraph.utils.HTMLParser'], ['goog.object'], {});
 goog.addDependency('../../../../src/utils/IdGenerator.js', ['acgraph.utils.IdGenerator'], [], {});
+goog.addDependency('../../../../src/utils/Eps.js', ['acgraph.utils.Eps'], [], {});
 goog.addDependency('../../../../src/utils/exporting.js', ['acgraph.utils.exporting'], ['goog.Timer', 'goog.dom', 'goog.style'], {});
 goog.addDependency('../../../../src/utils/utils.js', ['acgraph.utils'], ['goog.userAgent'], {});
 goog.addDependency('../../../../src/vector/Circle.js', ['acgraph.vector.Circle'], ['acgraph.utils.IdGenerator', 'acgraph.vector.Ellipse'], {});

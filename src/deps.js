@@ -50,3 +50,7 @@ goog.addDependency('../../../../src/vector/vml/ShapeType.js', ['acgraph.vector.v
 goog.addDependency('../../../../src/vector/vml/Stage.js', ['acgraph.vector.vml.Stage'], ['acgraph.vector.Stage', 'acgraph.vector.vml.Clip', 'acgraph.vector.vml.Defs'], {});
 goog.addDependency('../../../../src/vector/vml/Text.js', ['acgraph.vector.vml.Text'], ['acgraph.vector.Text', 'goog.math.Rect'], {});
 goog.addDependency('../../../../src/vector/vml/vml.js', ['acgraph.vector.vml'], ['acgraph.vector.vml.Clip', 'acgraph.vector.vml.Renderer', 'acgraph.vector.vml.Stage', 'acgraph.vector.vml.Text'], {});
+goog.addDependency('../../../../src/pdf/ttfSubset.js', ['acgraph.pdf.ttfSubset'], [], {});
+goog.addDependency('../../../../src/pdf/pdfWriter.js', ['acgraph.pdf.pdfWriter'], [], {});
+goog.addDependency('../../../../src/pdf/svg2pdf.js', ['acgraph.pdf.svg2pdf'], ['acgraph.pdf.ttfSubset', 'acgraph.pdf.pdfWriter'], {});
+goog.addDependency('../../../../src/pdf/stagePdf.js', ['acgraph.pdf.stagePdf'], ['acgraph.pdf.svg2pdf'], {});

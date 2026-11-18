@@ -76,6 +76,31 @@ Launch the page in your browser and here you are: you have created your first dr
 - [Introducing GraphicsJS, a Powerful Lightweight Graphics Library](https://www.sitepoint.com/introducing-graphicsjs-a-powerful-lightweight-graphics-library/) by [@RomanLubushkin](https://github.com/RomanLubushkin)
 - [GraphicsJS Overview](https://docs.anychart.com/Graphics/Overview) by [AnyChart](https://www.anychart.com/)
 
+# Local PDF Export
+
+GraphicsJS can export a stage to PDF entirely on the client, without any
+server. Text is written as **real, selectable text** (with an embedded
+TrueType subset and a ToUnicode CMap), shapes stay **vector**, and page size
+and DPI are configurable. The legacy remote-server `saveAsPdf` path is
+unchanged.
+
+```js
+// Register a TTF font once (CFF/OTF fonts are rejected explicitly).
+acgraph.pdf.registerFont('My Font', fontUint8Array);
+
+// Render the current stage to PDF bytes (no network).
+var doc = stage.toPdfDocument({ width: 600, height: 400, dpi: 72 });
+// doc.bytes (Uint8Array), doc.warnings (explicit degradations), doc.diagnostics
+
+// Or trigger a browser download.
+stage.saveAsPdfLocal({ filename: 'chart.pdf' });
+```
+
+Unsupported features (radial/pattern fills, bold/italic, external images,
+filters, etc.) are reported in `doc.warnings` with stable codes rather than
+being dropped silently. See [`docs/pdf-export.md`](docs/pdf-export.md) for the
+full feature matrix and the verification suite under `tools/`.
+
 # Building
 
 *Coming soon.*
